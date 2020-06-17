@@ -1,0 +1,27 @@
+section{
+  height: 80vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form{
+  background-color: #ffffff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 100px rgba(0,0,0,0.1);
+}
+form .title{
+  text-align: center;
+}
+
+form .input-group{
+  margin-top: 16px;
+}
+
+form .input-group label{
+  font-weight: bold;
+  color: #333333;
+  font-size: 16px;
+}

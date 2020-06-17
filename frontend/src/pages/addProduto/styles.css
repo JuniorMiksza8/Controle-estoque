@@ -1,0 +1,44 @@
+.container{
+  height: 90vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container form{
+  height: 100vh;
+  max-height: 600px;
+  width: 100vw;
+  max-width: 500px;
+  background-color: #ffffff;
+  padding:25px;
+  border-radius: 8px;
+  box-shadow: 0 0 100px rgba(0,0,0,0.1);
+}
+
+.container form .input-group{
+  
+  margin-top: 25px;
+}
+
+.container form .input-group label{
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.container form .title{
+  text-align: center;
+}
+
+form textarea{
+  width: 100%;
+  min-height: 140px;
+  color: #333;
+  border:1px solid #dcdce6;
+  border-radius: 8px;
+  padding: 16px 24px;
+  line-height: 24px;
+  resize: none;
+}
