@@ -5,9 +5,9 @@ module.exports = {
   development: {
     client: 'mysql',
     connection: {
-      host : 'suporte',
-      user : 'glpi',
-      password : 'phi@2020',
+      host : '10.0.0.105',
+      user : 'root',
+      password : '',
       database : 'ferramentaria'
     },
     migrations:{

@@ -46,7 +46,7 @@ module.exports = {
     .join('usuarios','usuarios.id','=','movimentacao.id_usuario')
     .join('produtos','produtos.id','=','movimentacao.id_produto')
     .limit(10)
-    .offset((page - 1) * 5)
+    .offset((page - 1) * 10)
     .select([
       'movimentacao.id',
       'usuarios.email',
@@ -56,14 +56,8 @@ module.exports = {
       'movimentacao.data_saida',
       'movimentacao.data_retorno'
     ]).catch((err) => res.json({err}).status(500))
-
-    console.log(page);
-    console.log(movimentacoes);
-
     return res.status(200).json(movimentacoes);
   },
-
-  
 
   async return(req,res){
     const data = new Date().toLocaleDateString();
@@ -74,7 +68,14 @@ module.exports = {
       data_retorno : data
     }).where('id',id);
 
-    res.status(200).send();
+
+    const movimentacao = await connection('movimentacao').select(['id_produto','quantidade']).where('id',id).first();
+    await connection('produtos').update({
+      quantidade : connection.raw(`?? + ${movimentacao.quantidade}`,['quantidade'])
+    }).where('id',movimentacao.id_produto).catch((err)=>console.log(err));
+    
+
+    res.status(200);
   }
 
 }

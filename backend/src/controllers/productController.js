@@ -49,7 +49,7 @@ module.exports = {
 
     const produtos = await connection('produtos')
     .limit(10)
-    .offset((page -1 )*5)
+    .offset((page -1 )* 10)
     .select('*')
     .catch((err)=> res.status(404).json({err}))
 

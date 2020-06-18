@@ -15,22 +15,28 @@ export default function Movimentacao(){
     api.post(`movimento/retorno/${id}`).then(res=>{
       console.log(res);
       alert('Produto retornado com sucesso');
-      loadData();
+      load();
     }).catch(err => console.log(err));
   }
 
-  function loadData(){
-
-    api.get(`movimento?page=${page}`).then(res =>{
-      console.log(res);
-      setMovimentacao([...movimentacao,...res.data]);
-    }).catch(err => console.log(err));
-   
+  async function loadData(){
+    const response = await api.get(`movimento?page=${page}`);
+    console.log(response);
+    setMovimentacao([...movimentacao,...response.data]);
   }
+
+  async function load(){
+    const response = await api.get(`movimento`);
+    setMovimentacao(response.data);
+  }
+
+  
 
   useEffect(()=>{
     loadData();
   },[page]);
+
+ 
 
   return (
     <>  
@@ -76,7 +82,7 @@ export default function Movimentacao(){
             </div>
             ))}
             <div className="line-break"></div>
-            <button type="submit" className="button vermais" onClick={()=>setPage(page + 1)}>Ver mais</button>
+            <button className="button vermais" onClick={()=>setPage(page + 1)}>Ver mais</button>
           </section>
 
     </>
