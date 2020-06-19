@@ -6,19 +6,20 @@ import './styles.css';
 
 export default function Entradas(){
 
-  const [page,setPage] = useState(1);
   const [entradas,setEntradas] = useState([]);
+  const [search,setSearch] = useState('');
 
-  async function loadData(){
-    api.get(`entrada?page=${page}`).then((res)=>{
-      console.log(res.data);
-      setEntradas([...entradas,...res.data]);
-    })
+   async function loadData(){
+    const response = await api.get(`entrada`);
+    console.log(response.data);
+    setEntradas(response.data);
   }
+
+  const filtrados = entradas.filter(entrada => entrada.id_produto.toLowerCase().includes(search.toLowerCase()));
 
   useEffect(()=>{
     loadData();
-  },[page]);
+  },[]);
 
   return (
     <>
@@ -26,16 +27,27 @@ export default function Entradas(){
       <ul>
         <li><Link to={{pathname : "/produtos"}} className="link">Voltar</Link></li>
       </ul>
+      <ul>
+              <p className="title">Total de registros : <strong>{entradas.length}</strong> </p>
+            </ul>
     </header>
+
+    <input 
+    type="text" 
+    className="search"  
+    placeholder="Procure a entrada pelo ID do produto" 
+    value={search}
+    onChange={(e)=>{setSearch(e.target.value)}}
+    />
 
     <section>
       
-    {entradas.map((obj)=>(
+    {filtrados.map((obj)=>(
               <div className="movimentacao" key={obj.id}>
               <p className="title">ID - {obj.id}</p>
 
               <p className="property">Produto:</p>
-              <p className="value">{obj.nome}</p>
+              <p className="value">{obj.nome} - {'#'+obj.id_produto}</p>
 
               <p className="property">Responsavel:</p>
               <p className="value">{obj.email}</p>
@@ -52,8 +64,6 @@ export default function Entradas(){
             </div>
             ))} 
 
-      <div className="line-break"></div>
-      <button type="submit" className="button vermais" onClick={()=>setPage(page + 1)}>Ver mais</button>
     </section>    
     </>
   )

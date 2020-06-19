@@ -1,5 +1,6 @@
 const connection = require('../database/connection');
 const userController = require('./userController');
+const moment =  require('moment');
 module.exports = {
 
   async create(req,res){
@@ -10,9 +11,9 @@ module.exports = {
 
     var {quantidade,data_saida,descricao} = req.body;
 
-    if(!data_saida){
-      data_saida = new Date().toLocaleDateString();
-    }
+   
+      data_saida = moment(new Date()).format("YYYY-MM-DD");
+    
 
     await connection('movimentacao')
       .insert({
@@ -37,10 +38,12 @@ module.exports = {
 
   async index(req,res){
 
-    const {page = 1} = req.query;
+    const {page } = req.query;
 
     const [count] = await connection('movimentacao').count();
     res.header('X-Total-Count',count['count(*)'])
+
+    if(page && page > 0){
 
     const movimentacoes =  await connection('movimentacao')
     .join('usuarios','usuarios.id','=','movimentacao.id_usuario')
@@ -49,6 +52,7 @@ module.exports = {
     .offset((page - 1) * 10)
     .select([
       'movimentacao.id',
+      'movimentacao.id_produto',
       'usuarios.email',
       'produtos.nome',
       'movimentacao.descricao',
@@ -56,17 +60,38 @@ module.exports = {
       'movimentacao.data_saida',
       'movimentacao.data_retorno'
     ]).catch((err) => res.json({err}).status(500))
-    return res.status(200).json(movimentacoes);
+
+    res.status(200).json(movimentacoes);
+    
+    }else{
+
+    const movimentacoes =  await connection('movimentacao')
+    .join('usuarios','usuarios.id','=','movimentacao.id_usuario')
+    .join('produtos','produtos.id','=','movimentacao.id_produto')
+    .select([
+      'movimentacao.id',
+      'movimentacao.id_produto',
+      'usuarios.email',
+      'produtos.nome',
+      'movimentacao.descricao',
+      'movimentacao.quantidade',
+      'movimentacao.data_saida',
+      'movimentacao.data_retorno'
+    ]).catch((err) => res.json({err}).status(500))
+
+    res.status(200).json(movimentacoes);
+    }
+
   },
 
   async return(req,res){
-    const data = new Date().toLocaleDateString();
+    const data = moment(new Date()).format("YYYY-MM-DD");
 
     const {id} = req.params;
 
     await connection('movimentacao').update({
       data_retorno : data
-    }).where('id',id);
+    }).where('id',id).catch((err)=>console.log(err));
 
 
     const movimentacao = await connection('movimentacao').select(['id_produto','quantidade']).where('id',id).first();
@@ -75,7 +100,7 @@ module.exports = {
     }).where('id',movimentacao.id_produto).catch((err)=>console.log(err));
     
 
-    res.status(200);
+    res.status(200).json({});
   }
 
 }

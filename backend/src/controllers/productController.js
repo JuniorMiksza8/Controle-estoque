@@ -1,5 +1,6 @@
 const connection = require('../database/connection');
 const entryController = require('./entryController');
+const moment = require('moment');
 const crypto = require('crypto');
 module.exports = {
 
@@ -7,7 +8,7 @@ module.exports = {
 
     const {nome,descricao,quantidade,situacao} = req.body;
     const usuario = req.headers.id_usuario;
-    const criacao = new Date().toLocaleDateString();
+    const criacao = moment(new Date()).format("YYYY-MM-DD");
     const id = crypto.randomBytes(4).toString('HEX');
 
      await connection('produtos')
@@ -43,19 +44,29 @@ module.exports = {
   },
 
   async index(req,res){
-    const { page = 1} = req.query;
+    const { page } = req.query;
 
     const [count] = await connection('produtos').count();
 
-    const produtos = await connection('produtos')
-    .limit(10)
-    .offset((page -1 )* 10)
-    .select('*')
-    .catch((err)=> res.status(404).json({err}))
-
     res.set('X-Total-Count',count['count(*)']);
 
-    return res.json(produtos);
+    if(page && page >= 1){
+      const produtos = await connection('produtos')
+      .limit(10)
+      .offset((page -1 )* 10)
+      .select('*')
+      .then(res.status(200))
+      .catch((err)=> res.status(404).json({err}))
+
+      res.json(produtos);
+    }else{
+      const produtos = await connection('produtos')
+      .select('*')
+      .then(res.status(200))
+      .catch((err)=> res.status(404).json({err}))
+
+      res.json(produtos);
+    }   
 
   }
   

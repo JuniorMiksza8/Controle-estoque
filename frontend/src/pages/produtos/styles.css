@@ -6,7 +6,7 @@ body{
 section{
   width: 100vw;
   display: flex;
-  justify-content: center;
+  flex-direction: row;
   flex-wrap: wrap;
 }
 
@@ -24,7 +24,7 @@ section .produto-container{
   border-radius: 8px;
   padding: 10px;
   margin-left: 25px;
-  margin-top: 25px;
+  margin-top: 0;
 }
 
 section .produto-container .button{
@@ -79,6 +79,8 @@ header li .link{
 header p{
   color: #5A5454;
 }
+
+
 
 .line-break{
   width: 100%;

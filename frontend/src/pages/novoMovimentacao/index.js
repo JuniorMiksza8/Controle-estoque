@@ -75,13 +75,7 @@ export default function NovoMovimentacao(){
             </textarea>
           </div>
 
-          <div className="input-group">
-            <label htmlFor="data_saida">Data de saida</label>
-            <InputMask 
-            mask="99/99/9999"
-            onChange={(e)=>setData(e.target.value)}
-            ></InputMask>
-          </div>
+          
 
           <button type="submit" className="button">Concluir</button>
 

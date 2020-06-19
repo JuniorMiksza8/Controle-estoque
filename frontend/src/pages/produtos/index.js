@@ -6,23 +6,24 @@ import './styles.css';
 export default function Produtos(){
 
   const [produtos,setProdutos] = useState([]);
-  const [page,setPage] = useState(1);
-  
-  async function loadData(){
+  const [search,setSearch] = useState('');
 
-    const response = await api.get(`/produto?page=${page}`);
-    console.log(response);
-    setProdutos([...produtos,...response.data]);
+  async function loadData(){
+    const response = await api.get(`/produto`);
+    setProdutos(response.data);
   }
 
-
+  const filtrados = produtos.filter(produto => produto.id.toLowerCase().includes(search.toLowerCase()));
+ 
 
   useEffect(()=>{
     loadData();
-  },[page]);
+  },[]);
  
   return(
     <>
+
+      
 
     <header>
       <ul>
@@ -30,14 +31,25 @@ export default function Produtos(){
         <li><Link to={{pathname : "/movimentacao"}} className="link">Saidas</Link></li>
         <li><Link to={{pathname : "/entradas"}} className="link">Entradas</Link></li>
       </ul>
+      <ul>
+        <p className="title">Total de registros : <strong>{produtos.length}</strong> </p>
+      </ul>
     </header>
+
+    <input 
+    type="text" 
+    className="search"  
+    placeholder="Procure o produto pelo ID" 
+    value={search}
+    onChange={(e)=>{setSearch(e.target.value)}}
+    />
 
     <section>
       
     
       
         {
-          produtos.map(produto => (
+          filtrados.map(produto => (
           <div className="produto-container" key={produto.id}>
             <p className="name">
               {produto.nome} - {produto.id}
@@ -66,9 +78,6 @@ export default function Produtos(){
           </div>
           ))
         }
-
-      <div className="line-break"></div>
-      <button type="submit" className="button vermais" onClick={()=>setPage(page + 1)}>Ver mais</button>
     </section>    
 
     

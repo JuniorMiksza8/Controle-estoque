@@ -23,6 +23,10 @@ header{
   background-color: #ffffff;
 }
 
+header.title{
+  font-size: 18px;
+}
+
 input,button,textarea{
   font: 400 18px Roboto,sans-serif;
 }
@@ -59,4 +63,15 @@ form input{
 
 .button:hover{
   filter: brightness(90%);
+}
+
+.search{
+  margin-top: 20px;
+  margin-left: 25%;
+  height: 60px;
+  width: 100%;
+  max-width: 50%;
+  border:1px solid #dcdce6;
+  border-radius: 8px;
+  padding: 0 24px;
 }
