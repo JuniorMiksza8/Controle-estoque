@@ -7,7 +7,7 @@ module.exports = {
     
     var {email,senha} = req.body;   
 
-    console.log(email,senha);
+    
 
     const user = await connection('usuarios').where({
       email : email
@@ -16,12 +16,14 @@ module.exports = {
     });
 
     if(user){
+      
       if(bcrypt.compareSync(senha,user.senha)){
         res.json({id : user.id}).status(200);
       }else{
         res.status(404);
       }
     }else{
+      console.log('nao encontrou');
       res.status(404);
     }
 

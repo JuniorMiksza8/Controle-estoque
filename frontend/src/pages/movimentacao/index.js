@@ -46,7 +46,10 @@ export default function Movimentacao(){
               <li><Link to={{pathname : "/produtos"}} className="link">Voltar</Link></li>
             </ul>
             <ul>
-              <p className="title">Total de registros : <strong>{movimentacao.length}</strong> </p>
+              <li><p className="link page-title">Saidas</p></li>
+            </ul>
+            <ul>
+              <p className="title">Total de registros : <strong>{filtrados.length}</strong> </p>
             </ul>
           </header>
 

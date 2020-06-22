@@ -14,6 +14,8 @@ routes.delete('/produto/:id',productController.delete);
 
 routes.get('/produto',productController.index);
 
+routes.get('/produto/:id',productController.read);
+
 routes.post('/usuario',userController.create);
 
 routes.post('/entrada/:id',entryController.create);

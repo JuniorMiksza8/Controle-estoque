@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import api from '../../api';
+import Moment from 'moment';
 
 import './styles.css';
 
@@ -28,8 +29,11 @@ export default function Entradas(){
         <li><Link to={{pathname : "/produtos"}} className="link">Voltar</Link></li>
       </ul>
       <ul>
-              <p className="title">Total de registros : <strong>{entradas.length}</strong> </p>
-            </ul>
+        <li><p className="link page-title">Entradas</p></li>
+      </ul>
+      <ul>
+        <p className="title">Total de registros : <strong>{filtrados.length}</strong> </p>
+      </ul>
     </header>
 
     <input 
@@ -44,24 +48,23 @@ export default function Entradas(){
       
     {filtrados.map((obj)=>(
               <div className="movimentacao" key={obj.id}>
-              <p className="title">ID - {obj.id}</p>
+                <p className="title">ID - {obj.id}</p>
 
-              <p className="property">Produto:</p>
-              <p className="value">{obj.nome} - {'#'+obj.id_produto}</p>
+                <p className="property">Produto:</p>
+                <p className="value">{obj.nome} - {'#'+obj.id_produto}</p>
 
-              <p className="property">Responsavel:</p>
-              <p className="value">{obj.email}</p>
+                <p className="property">Responsavel:</p>
+                <p className="value">{obj.email}</p>
 
-              <p className="property">Descrição:</p>
-              <p className="descricao">{obj.descricao}</p>
+                <p className="property">Descrição:</p>
+                <p className="descricao">{obj.descricao}</p>
 
-              <p className="property">Quantidade:</p>
-              <p className="value">{obj.quantidade}</p>     
-              
-              <p className="property">Feito em :</p>
-              <p className="value">{obj.data}</p>
-
-            </div>
+                <p className="property">Quantidade:</p>
+                <p className="value">{obj.quantidade}</p>     
+                
+                <p className="property">Feito em :</p>
+                <p className="value">{Moment(obj.data).format('DD/MM/YYYY')}</p>
+              </div>
             ))} 
 
     </section>    

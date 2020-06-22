@@ -2,6 +2,7 @@ const connection = require('../database/connection');
 const entryController = require('./entryController');
 const moment = require('moment');
 const crypto = require('crypto');
+const { read } = require('fs');
 module.exports = {
 
   async create(req,res){
@@ -23,9 +24,7 @@ module.exports = {
     .then(res.json({id}).status(201))
     .catch((err)=> res.status(500).json({err}));
 
-    entryController.checkin(id,usuario,descricao,quantidade).then(success=>
-      res.json({id})
-    ).catch((err)=>{
+    entryController.checkin(id,usuario,descricao,quantidade).catch((err)=>{
       console.log(err);
       res.status(500)
     });
@@ -68,6 +67,14 @@ module.exports = {
       res.json(produtos);
     }   
 
+  },
+
+  async read(req,res){
+    const { id } = req.params;
+
+    const produto = await connection('produtos').select('*').where('id',id).first().catch(err => req.status(500).json(err));
+
+    res.json(produto).status(200);
   }
   
 }

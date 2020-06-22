@@ -2,7 +2,6 @@ body{
   overflow-x: hidden;
 }
 
-
 section{
   width: 100vw;
   display: flex;
@@ -24,7 +23,7 @@ section .produto-container{
   border-radius: 8px;
   padding: 10px;
   margin-left: 25px;
-  margin-top: 0;
+  margin-top: 25px;
 }
 
 section .produto-container .button{
@@ -62,26 +61,6 @@ section .produto-container .buttons{
   justify-content: space-between;
 }
 
-header ul{
-  display: flex;
-  list-style: none;
-}
-header li{
-  margin-left: 25px;
-  text-decoration: none;
-}
-header li .link{
-  text-decoration: none;
-  font-size: 18px;
-  color: #000000;
-}
-
-header p{
-  color: #5A5454;
-}
 
 
 
-.line-break{
-  width: 100%;
-}

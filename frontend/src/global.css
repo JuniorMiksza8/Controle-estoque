@@ -23,7 +23,38 @@ header{
   background-color: #ffffff;
 }
 
-header.title{
+header ul{
+  display: flex;
+  list-style: none;
+}
+header li{
+  margin-left: 25px;
+  text-decoration: none;
+}
+header li .link{
+  text-decoration: none;
+  font-size: 18px;
+  color: #000000;
+}
+
+header p{
+  color: #5A5454;
+}
+
+header li .page-title{
+  font-size: 36px;
+  color: #30409c;
+}
+
+@media only screen and (max-width:600px){
+  header{
+    padding: 10px;
+    flex-direction: column;
+  }
+  
+}
+
+header .title{
   font-size: 18px;
 }
 
@@ -75,3 +106,11 @@ form input{
   border-radius: 8px;
   padding: 0 24px;
 }
+
+@media only screen and (max-width:600px){
+  .search{
+    margin-left: 13%;
+    max-width: 80%;
+  }
+} 
+

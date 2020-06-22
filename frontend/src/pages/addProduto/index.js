@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import {Link,useParams,useHistory} from 'react-router-dom';
 import api from '../../api';
 
@@ -8,11 +8,19 @@ export default function AddProduto(){
 
   const history = useHistory();
 
+  const [descricao,setDescricao] = useState();
+  const [quantidade,setQuantidade] = useState();
+  const [produto,setProduto] = useState('');;
+
   const {id} = useParams();
   const usuario = localStorage.getItem('userID');
 
-  const [descricao,setDescricao] = useState();
-  const [quantidade,setQuantidade] = useState();
+
+
+  async function loadProduto(){
+    const response = await api.get(`produto/${id}`);
+    setProduto(response.data);
+  }
 
   async function handle(e){
     e.preventDefault();
@@ -24,7 +32,12 @@ export default function AddProduto(){
       history.push('/produtos');
       alert(`${quantidade} unidades adicionadas ao produto ${id} com sucesso`);
     });
+
   }
+
+  useEffect(()=>{
+    loadProduto();
+  },[id])
 
   return (
     <>
@@ -55,6 +68,8 @@ export default function AddProduto(){
 
             </textarea>
           </div>
+
+          <p className="quantidade">Quantidade atual : {produto.quantidade}</p>
 
           <div className="input-group">
             <label htmlFor="quantidade">Quantidade</label>

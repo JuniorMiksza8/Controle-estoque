@@ -23,6 +23,12 @@ section .movimentacao{
   margin-left: 20px;
 }
 
+@media only screen and (max-width:600px){
+  section .movimentacao{
+    margin-left: 0;
+  }
+}
+
 section .movimentacao .descricao{
   overflow: hidden;
   display: -webkit-box;
@@ -41,8 +47,4 @@ section .movimentacao .property{
 
 section .movimentacao .value{
   color : #333333;
-}
-
-.line-break{
-  width: 100%;
 }

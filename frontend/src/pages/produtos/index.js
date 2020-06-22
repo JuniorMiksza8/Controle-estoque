@@ -29,10 +29,13 @@ export default function Produtos(){
       <ul>
         <li><Link to={{pathname : "/new"}} className="link">Novo produto</Link></li>
         <li><Link to={{pathname : "/movimentacao"}} className="link">Saidas</Link></li>
-        <li><Link to={{pathname : "/entradas"}} className="link">Entradas</Link></li>
+        <li><Link to={{pathname : "/entradas"}} className="link center">Entradas</Link></li>
+      </ul>
+      <ul className="align-center">
+        <li><p className="link page-title">Produtos</p></li>
       </ul>
       <ul>
-        <p className="title">Total de registros : <strong>{produtos.length}</strong> </p>
+        <p className="title">Total de registros : <strong>{filtrados.length}</strong> </p>
       </ul>
     </header>
 
