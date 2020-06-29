@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import {useParams,Link,useHistory} from 'react-router-dom';
 import api from '../../api';
-import InputMask from 'react-input-mask';
+import {FiArrowLeft} from 'react-icons/fi';
 import './styles.css';
 
 export default function NovoMovimentacao(){
@@ -35,7 +35,12 @@ export default function NovoMovimentacao(){
     <>
       <header>
         <ul>
-          <li><Link to={{pathname : "/produtos"}} className="link">Voltar</Link></li>
+          <li>
+            <Link to={{pathname : "/produtos"}} className="link back-button">
+              <FiArrowLeft className="icon"/>
+              <p>Voltar</p>
+            </Link>
+          </li>
         </ul>
       </header>
       <section>

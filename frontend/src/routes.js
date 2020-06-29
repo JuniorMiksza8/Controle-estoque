@@ -8,6 +8,7 @@ import NovoProduto from './pages/novoProduto';
 import NovoMovimentacao from './pages/novoMovimentacao';
 import AddProduto from './pages/addProduto';
 import Entradas from './pages/entradas';
+import NovoUsuario from './pages/novoUsuario';
 
 export default function Routes(){
   return(
@@ -20,6 +21,7 @@ export default function Routes(){
         <Route path="/newmovimentacao/:id" exact component={NovoMovimentacao}/>
         <Route path="/addproduto/:id"  component={AddProduto}/>
         <Route path="/entradas"  component={Entradas}/>
+        <Route path="/newuser"  component={NovoUsuario}/>
       </Switch>
     </BrowserRouter>
   )

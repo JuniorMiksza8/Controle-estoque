@@ -46,6 +46,32 @@ header li .page-title{
   color: #30409c;
 }
 
+header .column{
+  display: flex;
+  flex-direction: column;
+}
+
+header .user-buttons{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+header .user-button{
+  height: 48px;
+  width: 48px;
+  font-size: 24px;
+  background-color: transparent;
+  border: 0;
+}
+
+header .logout{
+  color: #b41f1f;
+}
+
+header .adduser{
+  color: #30409c;
+}
+
 @media only screen and (max-width:600px){
   header{
     padding: 10px;
@@ -112,5 +138,17 @@ form input{
     margin-left: 13%;
     max-width: 80%;
   }
+  header{
+    height:100vh;
+    max-height: 150px;
+  }
 } 
 
+.back-button{
+  display: flex;
+  justify-content: space-between;
+}
+
+.back-button .icon{
+  margin-right: 10px;
+}

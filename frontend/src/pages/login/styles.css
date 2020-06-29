@@ -6,15 +6,14 @@
   justify-content: center;
 }
 
-.form{
+.login-container .form{
   height: 100vh;
-  max-height: 450px;
+  max-height: 550px;
   width: 100vw;
-  max-width: 500px;
+  max-width: 450px;
   display: flex;
   flex-direction: column;
   align-content: center;
-  justify-content: space-between;
   padding: 50px;
   text-align: center;
 }

@@ -43,7 +43,12 @@ export default function Movimentacao(){
 
           <header>
             <ul>
-              <li><Link to={{pathname : "/produtos"}} className="link">Voltar</Link></li>
+              <li>
+                <Link to={{pathname : "/produtos"}} className="link back-button">
+                  <FiArrowLeft className="icon"/>
+                  <p>Voltar</p>
+                </Link>
+              </li>
             </ul>
             <ul>
               <li><p className="link page-title">Saidas</p></li>

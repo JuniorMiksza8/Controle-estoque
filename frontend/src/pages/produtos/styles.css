@@ -4,6 +4,7 @@ body{
 
 section{
   width: 100vw;
+  height: 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -24,6 +25,10 @@ section .produto-container{
   padding: 10px;
   margin-left: 25px;
   margin-top: 25px;
+}
+
+section .produto-container:first-child{
+  margin-left: 0;
 }
 
 section .produto-container .button{
@@ -60,6 +65,17 @@ section .produto-container .buttons{
   display: flex;
   justify-content: space-between;
 }
+
+@media only screen and (max-width:600px){
+  section .produto-container{
+    margin-left: 0;
+  }
+
+  
+} 
+
+
+
 
 
 

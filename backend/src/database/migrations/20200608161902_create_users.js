@@ -4,6 +4,7 @@ exports.up = function(knex) {
     table.string('id').primary();
     table.string('email');
     table.string('senha');
+    table.string('image');
   })
 };
 

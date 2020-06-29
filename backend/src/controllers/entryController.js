@@ -26,6 +26,7 @@ module.exports = {
 
     return res.send();
   },
+  
   async checkin(id,usuario,descricao,quantidade){
 
     const data = moment(new Date()).format("YYYY-MM-DD");

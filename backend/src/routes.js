@@ -1,6 +1,7 @@
 const express = require('express');
-
+const multer = require('multer');
 const routes = express.Router();
+const multerConfig = require('./multer');
 
 const productController = require('./controllers/productController');
 const userController = require('./controllers/userController');
@@ -16,7 +17,9 @@ routes.get('/produto',productController.index);
 
 routes.get('/produto/:id',productController.read);
 
-routes.post('/usuario',userController.create);
+routes.post('/usuario',multer(multerConfig).single('file'),userController.create);
+
+routes.post('/usuario/image',multer(multerConfig).single('file'),userController.createImage);
 
 routes.post('/entrada/:id',entryController.create);
 

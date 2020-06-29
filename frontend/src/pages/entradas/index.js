@@ -1,5 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import {Link} from 'react-router-dom';
+import {FiArrowLeft} from 'react-icons/fi';
+
 import api from '../../api';
 import Moment from 'moment';
 
@@ -17,7 +19,7 @@ export default function Entradas(){
   }
 
   const filtrados = entradas.filter(entrada => entrada.id_produto.toLowerCase().includes(search.toLowerCase()));
-
+  document.title = 'Entradas';
   useEffect(()=>{
     loadData();
   },[]);
@@ -26,7 +28,12 @@ export default function Entradas(){
     <>
       <header>
       <ul>
-        <li><Link to={{pathname : "/produtos"}} className="link">Voltar</Link></li>
+        <li>
+          <Link to={{pathname : "/produtos"}} className="link back-button">
+              <FiArrowLeft className="icon"/>
+              <p>Voltar</p>
+          </Link>
+          </li>
       </ul>
       <ul>
         <li><p className="link page-title">Entradas</p></li>

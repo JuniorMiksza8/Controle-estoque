@@ -1,20 +1,23 @@
 import React,{useState,useEffect} from 'react';
 import api from '../../api';
-import {Link} from 'react-router-dom';
-import {FiArrowRight} from 'react-icons/fi';
+import {Link,useHistory} from 'react-router-dom';
+import {FiArrowRight,FiPower,FiUserPlus} from 'react-icons/fi';
 import './styles.css';
 export default function Produtos(){
 
   const [produtos,setProdutos] = useState([]);
   const [search,setSearch] = useState('');
 
+  const history = useHistory();
+
   async function loadData(){
     const response = await api.get(`/produto`);
     setProdutos(response.data);
   }
 
-  const filtrados = produtos.filter(produto => produto.id.toLowerCase().includes(search.toLowerCase()));
- 
+  const filtrados = produtos.filter(produto => produto.id.toLowerCase().includes(search.toLowerCase())).sort((a,b)=>{
+    return new Date(b.criacao).toTimeString() - new Date(a.criacao).toTimeString()
+  });
 
   useEffect(()=>{
     loadData();
@@ -35,7 +38,17 @@ export default function Produtos(){
         <li><p className="link page-title">Produtos</p></li>
       </ul>
       <ul>
-        <p className="title">Total de registros : <strong>{filtrados.length}</strong> </p>
+        <div className="column">
+          <div className="user-buttons">
+            <button className="user-button adduser" onClick={()=> { history.push('/newuser')}}>
+              <FiUserPlus/>
+            </button>
+            <button className="user-button logout" onClick={()=>{ localStorage.removeItem('userID'); history.push('/')}}>
+              <FiPower />
+            </button>
+          </div>
+          <p className="title">Total de registros : <strong>{filtrados.length}</strong> </p>
+        </div>
       </ul>
     </header>
 

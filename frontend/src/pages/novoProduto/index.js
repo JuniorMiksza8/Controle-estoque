@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import {useHistory,Link} from 'react-router-dom';
 import api from '../../api';
-
+import {FiArrowLeft} from 'react-icons/fi';
 import './styles.css';
 
 export default function NovoProduto(){
@@ -46,7 +46,12 @@ export default function NovoProduto(){
     <>
     <header>
       <ul>
-        <li><Link to={{pathname : "/produtos"}} className="link">Voltar</Link></li>
+        <li>
+          <Link to={{pathname : "/produtos"}} className="link back-button">
+            <FiArrowLeft className="icon"/>
+            <p>Voltar</p>
+          </Link>
+        </li>
       </ul>
     </header>
     

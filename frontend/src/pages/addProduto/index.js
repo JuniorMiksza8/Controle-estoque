@@ -1,5 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import {Link,useParams,useHistory} from 'react-router-dom';
+import {FiArrowLeft} from 'react-icons/fi';
+
 import api from '../../api';
 
 import './styles.css';
@@ -9,7 +11,7 @@ export default function AddProduto(){
   const history = useHistory();
 
   const [descricao,setDescricao] = useState();
-  const [quantidade,setQuantidade] = useState();
+  const [quantidade,setQuantidade] = useState(0);
   const [produto,setProduto] = useState('');;
 
   const {id} = useParams();
@@ -43,7 +45,12 @@ export default function AddProduto(){
     <>
       <header>
         <ul>
-          <li><Link to={{pathname : "/produtos"}} className="link">Voltar</Link></li>
+          <li>
+            <Link to={{pathname : "/produtos"}} className="link back-button">
+              <FiArrowLeft className="icon"/>
+              <p>Voltar</p>
+            </Link>
+            </li>
         </ul>
       </header>
 
@@ -81,6 +88,8 @@ export default function AddProduto(){
             required
             />
           </div>
+
+          <p className="quantidade">Quantidade após adicionar : {Number(produto.quantidade) + Number(quantidade)}</p>
 
           <button className="button">Cadastrar</button>
 
