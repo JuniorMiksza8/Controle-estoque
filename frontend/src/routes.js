@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter,Route,Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 import Login from './pages/login';
 import Produtos from './pages/produtos';
@@ -10,18 +10,31 @@ import AddProduto from './pages/addProduto';
 import Entradas from './pages/entradas';
 import NovoUsuario from './pages/novoUsuario';
 
-export default function Routes(){
-  return(
+import {isAuth} from './auth.js';
+
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  return (
+
+    <Route {...rest} render={props => (
+      isAuth() ?
+        <Component {...props} />
+        : <Redirect to="/" />
+    )} />
+  );
+};  
+
+export default function Routes() {
+  return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact component={Login}/>
-        <Route path="/produtos" component={Produtos} />
-        <Route path="/movimentacao" component={Movimentacao}/>
-        <Route path="/new"  component={NovoProduto}/>
-        <Route path="/newmovimentacao/:id" exact component={NovoMovimentacao}/>
-        <Route path="/addproduto/:id"  component={AddProduto}/>
-        <Route path="/entradas"  component={Entradas}/>
-        <Route path="/newuser"  component={NovoUsuario}/>
+        <Route path="/" exact component={Login} />
+        <PrivateRoute path="/produtos" component={Produtos} />
+        <PrivateRoute path="/movimentacao" component={Movimentacao} />
+        <PrivateRoute path="/new" component={NovoProduto} />
+        <PrivateRoute path="/newmovimentacao/:id" exact component={NovoMovimentacao} />
+        <PrivateRoute path="/addproduto/:id" component={AddProduto} />
+        <PrivateRoute path="/entradas" component={Entradas} />
+        <PrivateRoute path="/newuser" component={NovoUsuario} />
       </Switch>
     </BrowserRouter>
   )

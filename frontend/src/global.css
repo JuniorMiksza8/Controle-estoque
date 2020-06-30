@@ -152,3 +152,20 @@ form input{
 .back-button .icon{
   margin-right: 10px;
 }
+
+.loader{
+  animation-name: load;
+  animation-duration: 5000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear; 
+  margin-top: 15px;
+}
+
+@keyframes load {
+  from {
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+}

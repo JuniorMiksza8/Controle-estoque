@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import {useHistory} from 'react-router-dom';
+import {FiLoader} from 'react-icons/fi';
 import api from '../../api';
 import './styles.css';
 
@@ -8,12 +9,13 @@ export default function Login(){
   const history = useHistory();
   const [email,setEmail] = useState('');
   const [senha,setSenha] = useState('');
-  
+  const [load,setLoad] = useState(false);
+
   async function authenticate(e){
     e.preventDefault();
-
+    setLoad(true);
     try{
-
+      
       const response = await api.post('sessao',{
         email : email,
         senha : senha
@@ -31,6 +33,9 @@ export default function Login(){
           console.log(err);
       }
     }
+
+    setLoad(false);
+    
   }
 
 
@@ -56,7 +61,9 @@ export default function Login(){
           required
           />
 
-          <button type="submit" className="button">entrar</button>
+          <button type="submit" className="button">
+            {!load ? 'entrar' : <FiLoader size={28} className="loader"/> }
+          </button>
         </form>
 
       </section>
